@@ -10,8 +10,10 @@ import static org.junit.Assert.assertThat;
 public class Ex5_AverageOfInts {
 
     private double average(List<Integer> ints) {
-        // TODO: Zwróć średnią z podanych liczb
-        return 0;
+        // TODO: Zwróć średnią z podanych liczb // Done!
+        return ints.stream()
+                .mapToInt(Integer::intValue)
+                .average().getAsDouble();
     }
 
     @Test

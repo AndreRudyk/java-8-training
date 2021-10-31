@@ -4,18 +4,26 @@ import eu.javeo.training.java8.data.Data;
 import eu.javeo.training.java8.data.model.Invoice;
 import eu.javeo.training.java8.data.model.User;
 import org.junit.Test;
+
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static eu.javeo.training.java8.data.Data.*;
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class Ex7_CountInvoicesByUser {
 
     private Map<User, Long> countInvoicesByUser(List<Invoice> invoices) {
-        // TODO: Zwróć użytkowników wraz z liczbą faktur jakie zostały im wystawione
-        return null;
+        // TODO: Zwróć użytkowników wraz z liczbą faktur jakie zostały im wystawione // Done!
+        return invoices.stream()
+                .map(s -> s.getUser())
+                .collect(groupingBy(identity(), counting()));
+
     }
 
     @Test

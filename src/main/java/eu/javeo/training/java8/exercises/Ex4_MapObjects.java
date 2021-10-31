@@ -1,10 +1,14 @@
 package eu.javeo.training.java8.exercises;
 
 import eu.javeo.training.java8.data.Data;
-import eu.javeo.training.java8.data.model.Order;
-import eu.javeo.training.java8.data.model.Invoice;
+import eu.javeo.training.java8.data.model.*;
 import org.junit.Test;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import static eu.javeo.training.java8.data.Data.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -13,8 +17,24 @@ import static org.hamcrest.core.Is.is;
 public class Ex4_MapObjects {
 
     private List<Invoice> toInvoice(List<Order> orders) {
-        // TODO: Przekształć zamówienia na faktury
-        return null;
+        // TODO: Przekształć zamówienia na faktury // Done!
+        return orders.stream()
+                .map(o -> getItemFromOrders(o))
+                .collect(Collectors.toList());
+    }
+
+    private List<InvoiceItem> orderToInvoiceItem(Map<Product, Integer> products){
+        List<InvoiceItem> invoiceItems = new ArrayList<>();
+
+        for(Map.Entry<Product, Integer> entry : products.entrySet()){
+            invoiceItems.add(new InvoiceItem(entry.getKey(), entry.getValue()));
+        }
+
+        return invoiceItems;
+    }
+
+    private Invoice getItemFromOrders(Order order){
+        return new Invoice(null, order.getOrderDate(), order.getUser(),orderToInvoiceItem(order.getProducts()));
     }
 
     @Test
