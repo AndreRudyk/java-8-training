@@ -19,7 +19,7 @@ public class Ex4_MapObjects {
     private List<Invoice> toInvoice(List<Order> orders) {
         // TODO: Przekształć zamówienia na faktury // Done!
         return orders.stream()
-                .map(o -> getItemFromOrders(o))
+                .map(this::getItemFromOrders)
                 .collect(Collectors.toList());
     }
 

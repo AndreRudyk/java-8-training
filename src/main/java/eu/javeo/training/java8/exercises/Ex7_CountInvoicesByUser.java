@@ -21,7 +21,7 @@ public class Ex7_CountInvoicesByUser {
     private Map<User, Long> countInvoicesByUser(List<Invoice> invoices) {
         // TODO: Zwróć użytkowników wraz z liczbą faktur jakie zostały im wystawione // Done!
         return invoices.stream()
-                .map(s -> s.getUser())
+                .map(Invoice::getUser)
                 .collect(groupingBy(identity(), counting()));
 
     }
